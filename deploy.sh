@@ -25,14 +25,14 @@ fi
 
 # PM2 Management
 echo "--> Managing PM2 process..."
+# Always delete to ensure config reload
 if pm2 describe "$APP_NAME" > /dev/null; then
-    echo "Restarting existing process..."
-    pm2 restart "$APP_NAME"
-else
-    echo "Starting new process..."
-    # Start using the config file
-    pm2 start telegram-shell-bot.yml
+    echo "Removing old process to apply new configuration..."
+    pm2 delete "$APP_NAME"
 fi
+
+echo "Starting process from config..."
+pm2 start telegram-shell-bot.yml
 
 # Save PM2 list
 pm2 save

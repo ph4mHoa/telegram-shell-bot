@@ -1,4 +1,4 @@
 apps:
-  interpreter: "/bin/bash"
-  script: "poetry"
-  args: ["run", "python", "bot.py"]
+  - name: "telegram-shell-bot"
+    script: "/bin/bash"
+    args: ["-c", "poetry run python bot.py"]

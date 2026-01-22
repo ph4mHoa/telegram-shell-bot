@@ -23,6 +23,11 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+# Hotfix for Python 3.12: Force upgrade APScheduler
+# python-telegram-bot v13 pins APScheduler==3.6.3 which is broken on Py3.12
+echo "--> Applying hotfix for APScheduler on Python 3.12..."
+poetry run pip install "APScheduler>=3.10"
+
 # PM2 Management
 echo "--> Managing PM2 process..."
 # Always delete to ensure config reload
